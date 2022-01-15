@@ -8,8 +8,14 @@ type mystack struct {
 }
 
 func stackpush(a int, b *mystack) {
-	b.data = append(b.data, a)
-	b.height = b.height + 1
+	// b.data = append(b.data, a)
+	if b.height < len(b.data) {
+		b.data[b.height] = a
+		b.height = b.height + 1
+	} else {
+		b.data = append(b.data, a)
+		b.height = b.height + 1
+	}
 }
 
 func stackpop(b *mystack) (a int) {
@@ -18,11 +24,11 @@ func stackpop(b *mystack) (a int) {
 	b.data[b.height-1] = 0
 	b.height = b.height - 1
 	return a
-
 }
 
 func main() {
 	var e mystack
+	// e.data = append(e.data)
 
 	stackpush(2, &e)
 	fmt.Println(e)
@@ -66,11 +72,14 @@ func main() {
 	fmt.Print("\n Take out no.7: ", z)
 	fmt.Print(e)
 
+	stackpush(11, &e)
+	fmt.Println("\n", e)
+
 	t := stackpop(&e)
 	fmt.Print("\n Take out no.8: ", t)
 	fmt.Print(e)
 
-	u := stackpop(&e)
-	fmt.Print("\n Take out no.9: ", u)
-	fmt.Print(e)
+	// u := stackpop(&e)
+	// fmt.Print("\n Take out no.9: ", u)
+	// fmt.Print(e)
 }
